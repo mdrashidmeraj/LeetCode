@@ -1,0 +1,8 @@
+public class Solution {
+	public void merge(ArrayList<Integer> a, ArrayList<Integer> b) {
+        for(int j = 0;j<b.size();j++){
+            a.add(b.get(j));
+        }
+        Collections.sort(a);
+	}
+}
