@@ -2,22 +2,15 @@ public class Solution {
 	public void rotate(ArrayList<ArrayList<Integer>> a) {
         int row = a.size();
         int col = a.get(0).size();
-        ArrayList<ArrayList<Integer>> b = new ArrayList<>();
-        for(int i=0;i<row;i++){
-            b.add(new ArrayList<>());
-        }
         for(int i=0; i<row; i++){
-            for(int j =0;j<col;j++){
-                b.get(j).add(i, a.get(i).get(j));
+            for(int j =i;j<col;j++){
+                int temp = a.get(i).get(j);
+                a.get(i).set(j, a.get(j).get(i));
+                a.get(j).set(i, temp);
             }
         }
-        for(ArrayList<Integer> arr: b){
+        for(ArrayList<Integer> arr: a){
             reverse(arr);
-        }
-        for(int i=0; i<row; i++){
-            for(int j =0;j<col;j++){
-                a.get(i).set(j, b.get(i).get(j));
-            }
         }
     }
     void reverse(ArrayList<Integer> arr){
