@@ -1,0 +1,27 @@
+public class Solution {
+	public int pow(int x, int n, int d) {
+        if(x==0) return 0;
+        if(n == 0) return 1;
+        long num = x;
+        if(num<0) num = -1*num;
+        long a = 1;
+        long nn = n;
+        num = num%d;
+        while(nn>0){
+            if(nn%2 == 0){
+               num = num*num;
+               num = num%d;
+               nn=nn/2;
+            }else{
+               a = (a*num)%d;
+               nn = nn-1;
+            }
+            a = a%d;
+        }
+        if(x<0 && n % 2 != 0){
+            long ans = a%d;
+            return (int)(d - ans);
+        }
+        return (int)(a);
+	}
+}
