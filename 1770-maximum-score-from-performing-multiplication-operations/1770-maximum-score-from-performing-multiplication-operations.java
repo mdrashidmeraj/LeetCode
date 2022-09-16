@@ -1,21 +1,23 @@
 class Solution {
+    static int ans;
     public int maximumScore(int[] nums, int[] multipliers) {
-        // For Right Pointer
-        int n = nums.length;
-        // Number of Operations
-        int m = multipliers.length;
-        int[][] dp = new int[m + 1][m + 1];
-        
-        // for (int i = 0; i <= m; i++)
-        //     Arrays.fill(dp[i], 0);
-        
-        for (int op = m - 1; op >= 0; op--) {
-            for (int left = op; left >= 0; left--) {
-                dp[op][left] = Math.max(multipliers[op] * nums[left] + dp[op + 1][left + 1],
-                                   multipliers[op] * nums[n - 1 - (op - left)] + dp[op + 1][left]);
-            }
+        Integer dp[][]  = new Integer[nums.length+1][multipliers.length+1];
+        return solve(nums,multipliers,0,0,dp);
+    }
+    
+    int solve(int large[],int small[],int index,int start,Integer[][] dp) {
+          
+        if(index == small.length) {
+            return 0;
         }
         
-        return dp[0][0];
+        if(dp[index][start] != null) return dp[index][start];
+        
+        int ans1 = small[index] * large[start] + solve(large,small,index+1,start+1,dp);
+        int ans2 = small[index] * large[large.length-1-(index-start)] + solve(large,small,index+1,start,dp);
+        
+        
+        
+        return dp[index][start] = Math.max(ans1,ans2);
     }
 }
