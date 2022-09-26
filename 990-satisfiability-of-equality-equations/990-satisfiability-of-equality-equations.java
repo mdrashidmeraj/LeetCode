@@ -32,22 +32,25 @@ class Solution {
         return true;
     }
     int find(int a){
-        if(parent[a] != a) {
-            parent[a] = find(parent[a]);
-        }
-        return parent[a];
+        // if(parent[a] != a) {
+        //     parent[a] = find(parent[a]);
+        // }
+        // return parent[a];
+        if(parent[a] == a) return a;
+        return find(parent[a]);
     }
     void union(int a, int b){
         int x = find(a);
         int y = find(b);
         if(x == y) return;
-        if(rank[x]<rank[y]){
-            parent[x] = y;
-        }else if(rank[x]>rank[y]){
-            parent[y] = x;
-        }else{
-            parent[y] = x;
-            rank[x] = rank[x]+1;
-        }
+        // if(rank[x]<rank[y]){
+        //     parent[x] = y;
+        // }else if(rank[x]>rank[y]){
+        //     parent[y] = x;
+        // }else{
+        //     parent[y] = x;
+        //     rank[x] = rank[x]+1;
+        // }
+        parent[y] = x;
     }
 }
